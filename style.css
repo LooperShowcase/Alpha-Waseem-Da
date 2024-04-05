@@ -1,0 +1,18 @@
+body {
+  background-color: rgb(0, 0, 0);
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+}
+h1 {
+  color: #ffffff;
+}
+div {
+  font-family: "Alumni Sans Inline One", sans-serif;
+  font-weight: 400;
+  background-color: rgb(255, 255, 255);
+}
+a {
+  font-size: large;
+  color: #ffffff;}
+
+ 

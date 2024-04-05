@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="navbar.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hamburger</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hamburger Game</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: beige;
+      }
+      .board {
+        display: grid;
+        grid-template-columns: repeat(3,150px);
+        grid-gap: 5px;
+        justify-content: center;
+      }
+      .cell {
+        width:150px;
+        height: 150px;
+        font-size: 36px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a class="index1" href="index.html">Home</a></li>
+      <li><a href="index2.html">game</a></li>
+    </ul>
+
+    <h1>Tic Tac Toe with Emojis 🍔 vs 🥩</h1>
+    <div class="board" id="board">
+      <div class="cell" onclick="makeMove(0)"></div>
+      <div class="cell" onclick="makeMove(1)"></div>
+      <div class="cell" onclick="makeMove(2)"></div>
+      <div class="cell" onclick="makeMove(3)"></div>
+      <div class="cell" onclick="makeMove(4)"></div>
+      <div class="cell" onclick="makeMove(5)"></div>
+      <div class="cell" onclick="makeMove(6)"></div>
+      <div class="cell" onclick="makeMove(7)"></div>
+      <div class="cell" onclick="makeMove(8)"></div>
+    </div>
+    <p id="message"></p>
+    <script>
+      let board = ["", "", "", "", "", "", "", "", ""];
+      let currentPlayer = "🍔";
+      let gameOver = false;
+
+      const reload = document.createElement("button");
+      reload.innerText = "Play Again!";
+      reload.onclick = function () {
+        location.reload();
+      };
+
+      function makeMove(position) {
+        if (!gameOver && board[position] === "") {
+          board[position] = currentPlayer;
+          document.getElementsByClassName("cell")[position].innerText =
+            currentPlayer;
+          if (checkWin()) {
+            document.getElementById("message").innerText =
+              currentPlayer + " wins! 🎉";
+            document.getElementById("message").parentNode.appendChild(reload);
+            gameOver = true;
+          } else if (checkDraw()) {
+            document.getElementById("message").innerText = "It's a draw! 😐";
+            document.getElementById("message").parentNode.appendChild(reload);
+            gameOver = true;
+          } else {
+            currentPlayer = currentPlayer === "🍔" ? "🥩" : "🍔";
+          }
+        }
+      }
+
+      function checkWin() {
+        const winConditions = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8], // Rows
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8], // Columns
+          [0, 4, 8],
+          [2, 4, 6], // Diagonals
+        ];
+        for (let condition of winConditions) {
+          if (
+            board[condition[0]] !== "" &&
+            board[condition[0]] === board[condition[1]] &&
+            board[condition[1]] === board[condition[2]]
+          ) {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      function checkDraw() {
+        return !board.includes("");
+      }
+    </script>
+  </body>
+</html>
